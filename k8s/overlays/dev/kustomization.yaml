@@ -1,0 +1,11 @@
+# Specify the path for base resources
+bases:
+- ../../base
+namespace: spring-rest-api-dev
+# Specify the path of resources in current overlays
+resources:
+- namespace.yaml
+# Specify the path of resources that will override values in base's resources
+patchesStrategicMerge:
+- deployment.yaml
+

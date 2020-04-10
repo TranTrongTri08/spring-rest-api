@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: spring-rest-api
+  labels:
+    app: spring-rest-api # Whatever we want
+# Namespace will be override by value in kustomization dev
+#  namespace: spring-rest-api-dev 
+spec:
+  replicas: 1
+  selector: # Define which pod are managed by this deployment
+            # Should match with label on pod 
+    matchLabels:
+      app: spring-rest-api 
+                 
+  template: # Pod configuration
+    metadata:
+      labels:
+        app: spring-rest-api # Label for pod
+    spec: # Specify which container will run inside pod
+      #serviceAccountName: spring-rest-api # Specify service account to run deployment
+      containers:
+      - name: spring-rest-api
+        imagePullPolicy: Always
+        image: 181296/spring-rest-api:1 # usernameDockerHub/imageName:tag
+        env:
+        - name: JVM_OPTS
+          value: "-Xms2048m -Xmx2048m" # Specify env for JVM heap memory in megabytes
+        - name: name
+          value: "dev"
+        #command: ["printenv"] # command equals to Entrypoint in dockerfile
+        #command: ["sh", "-c", "echo Helloworld"]
+        # command: ["echo"]
+        # command: ["echo", "$(GREETING) $(HONORIFIC) $(NAME)"]
+        # command: ["printenv"]
+        # # command: ["/bin/sh", "-c"]
+        # args: ["$(my_env)"]
+        # args:
+        # - echo starting;
+        volumeMounts:
+        - mountPath: /my-volume # directory location on container of Pod
+          name: my-volume
+        ports:
+        - containerPort: 8080
+      #   resources:
+      #     requests:
+      #       memory: "256Mi" # Specify 256MB memory for each pod
+      #       cpu: "50m" # Specify 50 mili-cpu which means 0,02 cpu for each pod
+      #     limits:
+      #       memory: "500Mi" # Specify limit memory
+      #       cpu: "200m" # Specify limit cpu
+      volumes:
+      - name: my-volume
+        hostPath:
+          path: /var/lib/docker  # directory location on host
+       
