@@ -2,7 +2,8 @@
 pipeline {
   environment {
     registry = "181296/spring-rest-api"
-    registryCredential = 'dockerhub'
+	// This get from jenkins credential for Docker Registry
+    dockerRegistryCredential = 'dockerRegistryCredential'
     dockerImage = ''
     imageTag = ''
   }
@@ -33,7 +34,7 @@ pipeline {
      stage('Pushing image to docker hub') {
       steps{
         script {
-          docker.withRegistry( '', registryCredential ) {
+          docker.withRegistry( '', dockerRegistryCredential ) {
             dockerImage.push()
           }
           echo 'Push image to docker hub scuccessfully'
