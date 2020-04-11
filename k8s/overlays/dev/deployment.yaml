@@ -26,8 +26,10 @@ spec:
         env:
         - name: JVM_OPTS
           value: "-Xms2048m -Xmx2048m" # Specify env for JVM heap memory in megabytes
-        - name: name
-          value: "dev"
+        - name: my_param
+          value: "my_param_value"
+        - name: env
+          value: "sit"
         #command: ["printenv"] # command equals to Entrypoint in dockerfile
         #command: ["sh", "-c", "echo Helloworld"]
         # command: ["echo"]
