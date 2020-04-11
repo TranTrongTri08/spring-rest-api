@@ -6,8 +6,9 @@ pipeline {
     stage('Using K8S deploy application') {
       steps {
         sh 'cd k8s'
-		sh 'kubectl apply -k overlays/dev'
-		sh 'kubectl get pods -n spring-rest-api-dev'
+	sh 'pwd'
+	sh 'kubectl apply -k overlays/dev'
+	sh 'kubectl get pods -n spring-rest-api-dev'
         echo 'Deploy application successfully'
       }
     }
