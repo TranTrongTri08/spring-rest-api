@@ -23,7 +23,7 @@ spec:
       - name: spring-rest-api
         # image: debian
         # imagePullPolicy: Always
-        image: 181296/spring-rest-api:1 # username/imageName:tag
+        image: 181296/spring-rest-api:5 # username/imageName:tag
         env:
         - name: JVM_OPTS
           value: "-Xms2048m -Xmx2048m"
